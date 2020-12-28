@@ -36,7 +36,7 @@ seconddecimal = float (str (value - firstdecimal)[:-2])
 
 if len(str(seconddecimal)) >= 4:
     seconddecimal =  round((seconddecimal),4)
-read_value_excel = pd.read_excel(r'C:\Users\eeccm\Downloads\Tabela da distribuição normal 2.xlsx')
+read_value_excel = pd.read_excel(r'Tabela da distribuição normal 2.xlsx')
 print('until here is alright')
 find_value_excel = read_value_excel.set_index('Z')
 return_value_excel = find_value_excel.at[firstdecimal,seconddecimal]
