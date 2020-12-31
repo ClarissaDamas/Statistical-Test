@@ -13,13 +13,12 @@ def Zwithout_average(n):
     listnumbers = list(map(int,input('Which are the numbers?  ').split()))
     listnumbers_aspandas = pd.Series(listnumbers)
     describe_numbers = (listnumbers_aspandas).describe()
-    formula = round(((listnumbers_aspandas).mean() - n /(listnumbers_aspandas).std()),2)
+    formula = round(((n - listnumbers_aspandas).mean() /(listnumbers_aspandas).std()),2)
     print(describe_numbers)
     return formula
 
 if Question == 'yes':
     value = Zwith_average(Zlimit)
-    print(value)
 
 else:
     value = Zwithout_average(Zlimit)
@@ -32,15 +31,20 @@ if len(str(value)) >= 4:
 
 else:
     firstdecimal = float (str (value))
-seconddecimal = float (str (value - firstdecimal)[:-2])
+seconddecimal = float (str (value - firstdecimal))
 
 if len(str(seconddecimal)) >= 4:
     seconddecimal =  round((seconddecimal),4)
+
+print(value)
+print(seconddecimal)
 read_value_excel = pd.read_excel(r'Tabela da distribuição normal 2.xlsx')
 print('until here is alright')
 find_value_excel = read_value_excel.set_index('Z')
 return_value_excel = find_value_excel.at[firstdecimal,seconddecimal]
 print(return_value_excel)
+
+
 
 #NOW DO PROBABILITY
 #if the (input('Do you wanna know the probability?Answer yes or no only')) == 'yes':
