@@ -1,6 +1,6 @@
 import pandas as pd
 n = float(input('Which limit?  '))
-listnumbers = list(map(int,input('Which are the numbers?  ').split()))
+listnumbers = list(map(float,input('Which are the numbers?  ').split()))
 listnumbers_aspandas = pd.Series(listnumbers)
 describe_numbers = (listnumbers_aspandas).describe()
 #mean = listnumbers_aspandas.mean()
