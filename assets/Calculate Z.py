@@ -4,9 +4,9 @@ Zlimit = float(input('Which limit?  '))
 Question = input('Do you have average and std already?Answer Yes or No only!  ') #let everything uppercase so dont have mistakes
 
 def Zwith_average(n):
-    Mean = float(input('Which is the mean?  '))
+    mean = float(input('Which is the mean?  '))
     std = float(input('Which is the std?  '))
-    formula = round(((n - Mean)/std ),2)
+    formula = round(((n - mean)/std ),2)
     return formula
 
 def Zwithout_average(n):
