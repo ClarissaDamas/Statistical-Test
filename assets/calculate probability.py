@@ -54,7 +54,7 @@ except ValueError as error:
 print(value)
 print(seconddecimal)
 read_value_excel = pd.read_excel(r'Tabela da distribuição normal 2.xlsx')
-print('until here is alright')
+print('Until here is alright!')
 try:
     find_value_excel = read_value_excel.set_index('Z')
     return_value_excel = find_value_excel.at[firstdecimal,seconddecimal]
