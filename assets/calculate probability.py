@@ -6,7 +6,7 @@ except:
     print('We got an error,please make sure you wrote a number as Zlimit,ex: 2.0,3 or 0')
     exit()
 
-Question = input('Do you have average and std already?Answer Yes or No only!  ') #let everything uppercase so dont have mistakes
+Question = ((input('Do you have average and std already?Answer Yes or No only!  ')).upper())
 
 def Zwith_average(Zlimit):
     Mean = float(input('Which is the mean?  '))
@@ -18,12 +18,19 @@ def Zwithout_average(Zlimit,listnumbers):
     listnumbers_aspandas = pd.Series(listnumbers)
     describe_numbers = (listnumbers_aspandas).describe()
     formula = round(((Zlimit - listnumbers_aspandas).mean() /(listnumbers_aspandas).std()),2)
-    print(listnumbers)
     print(describe_numbers)
-    return formula
+    if listnumbers == []:
+        print('We got an error because you wrote something we cannot calculate the mean.Please make sure to write more than one number,if you already have the mean and std run the code again and answer yes.')
+        exit()
+
+    elif listnumbers_aspandas.mean() == listnumbers_aspandas.min() :
+        print('We got an error because you wrote:',(listnumbers)[0],'or',int((listnumbers)[0]),'.Please make sure to write more than one number,if you already have the mean and std run the code again and answer yes.')
+        exit()
+
+    else: return formula
 
 try:
-    if Question == 'yes':
+    if Question == 'YES':
         value = Zwith_average(Zlimit)
 
     else:
@@ -55,14 +62,15 @@ print(value)
 print(seconddecimal)
 read_value_excel = pd.read_excel(r'Tabela da distribuição normal 2.xlsx')
 print('Until here is alright!')
-try:
-    find_value_excel = read_value_excel.set_index('Z')
-    return_value_excel = find_value_excel.at[firstdecimal,seconddecimal]
-    print(return_value_excel)
+find_value_excel = read_value_excel.set_index('Z')
+return_value_excel = find_value_excel.at[firstdecimal,seconddecimal]
+print(return_value_excel)
 
-except KeyError as error:
-    print('We got an error because you wrote:',(listnumbers)[0],'or',int((listnumbers)[0]),'.Please make sure to write more than one number,if you already have the mean and std run the code again and answer yes.')
-    #raise IndexError(print('We got an error because you wrote:',(listnumbers),'.Please make sure to write more than one number,if you already have the mean and std run the code again and answer yes.')) from e
+
+
+
+
+
 
 
 #NOW DO PROBABILITY
