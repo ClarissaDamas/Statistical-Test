@@ -1,43 +1,68 @@
 import pandas as pd
 
-Zlimit = float(input('Which limit?  '))
-Question = input('Do you have average and std already?Answer Yes or No only!  ') #let everything uppercase so dont have mistakes
+try:
+    Zlimit = float(input('Which limit?  '))
+except:
+    print('We got an error,please make sure you wrote a number as Zlimit,ex: 2.0,3 or 0')
+    exit()
 
-def Zwith_average(n):
-    mean = float(input('Which is the mean?  '))
+Question = ((input('Do you have average and std already?Answer Yes or No only!  ')).upper())
+
+def Zwith_average(Zlimit):
+    Mean = float(input('Which is the mean?  '))
     std = float(input('Which is the std?  '))
-    formula = round(((n - mean)/std ),2)
+    formula = round(((Zlimit - Mean)/std ),2)
     return formula
 
-def Zwithout_average(n):
-    listnumbers = list(map(int,input('Which are the numbers?  ').split()))
+def Zwithout_average(Zlimit,listnumbers):
     listnumbers_aspandas = pd.Series(listnumbers)
     describe_numbers = (listnumbers_aspandas).describe()
-    formula = round(((listnumbers_aspandas).mean() - n /(listnumbers_aspandas).std()),2)
+    formula = round(((Zlimit - listnumbers_aspandas).mean() /(listnumbers_aspandas).std()),2)
     print(describe_numbers)
-    return formula
+    if listnumbers == []:
+        print('We got an error because you wrote something we cannot calculate the mean.Please make sure to write more than one number,if you already have the mean and std run the code again and answer yes.')
+        exit()
 
-if Question == 'yes':
-    value = Zwith_average(Zlimit)
-    print(value)
+    elif listnumbers_aspandas.mean() == listnumbers_aspandas.min() :
+        print('We got an error because you wrote:',(listnumbers)[0],'or',int((listnumbers)[0]),'.Please make sure to write more than one number,if you already have the mean and std run the code again and answer yes.')
+        exit()
 
-else:
-    value = Zwithout_average(Zlimit)
+    else: return formula
 
-if value < 0 :
-    value = (value)*(-1)
+try:
+    if Question == 'YES':
+        value = Zwith_average(Zlimit)
 
-if len(str(value)) >= 4:
-    firstdecimal = float((str (value)[:-1]))
+    else:
+        listnumbers = list(map(float,input('Which are the numbers?  ').split()))
+        value = Zwithout_average(Zlimit,listnumbers)
 
-else:
-    firstdecimal = float (str (value))
-seconddecimal = float (str (value - firstdecimal)[:-2])
+    if value < 0 :
+        value = (value)*(-1)
 
-if len(str(seconddecimal)) >= 4:
-    seconddecimal =  round((seconddecimal),4)
+    if len(str(value)) >= 4:
+        firstdecimal = float((str (value)[:-1]))
+
+    else:
+        firstdecimal = float (str (value))
+    seconddecimal = float (str (value - firstdecimal))
+
+    if len(str(seconddecimal)) >= 4:
+        seconddecimal =  round((seconddecimal),4)
+
+except ZeroDivisionError as error:
+    print('The std number you gave was:',std,',please make sure to write a positive number')
+    exit()
+
+except ValueError as error:
+    print('We got an error,please make sure you wrote a number,ex: 2.0,3 or 0')
+    exit()
+
+print(value)
+print(seconddecimal)
 read_value_excel = pd.read_excel(r'Tabela da distribuição normal 2.xlsx')
-print('until here is alright')
+print('Until here is alright!')
+
 find_value_excel = read_value_excel.set_index('Z')
 return_value_excel = find_value_excel.at[firstdecimal,seconddecimal]
 print(return_value_excel)
