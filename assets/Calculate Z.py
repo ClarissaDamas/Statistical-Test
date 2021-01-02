@@ -62,16 +62,10 @@ print(value)
 print(seconddecimal)
 read_value_excel = pd.read_excel(r'Tabela da distribuição normal 2.xlsx')
 print('Until here is alright!')
+
 find_value_excel = read_value_excel.set_index('Z')
 return_value_excel = find_value_excel.at[firstdecimal,seconddecimal]
 print(return_value_excel)
-
-
-
-
-
-
-
 
 #NOW DO PROBABILITY
 #if the (input('Do you wanna know the probability?Answer yes or no only')) == 'yes':
