@@ -10,7 +10,7 @@ Python programming language
 pandas software library
 
 ## Installation
-You need a text editor,ide or similar(that  runs python) and download a excel file that is already in the project(Standard Normal Distribution Table),the images are not necessary except if you have doubts.
+You need a text editor,IDE or similar(that  runs python) and download a excel file that is already in the project(Standard Normal Distribution Table),the images are not necessary except if you have doubts.
 
 ## Usage
 
