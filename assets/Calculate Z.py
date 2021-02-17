@@ -1,41 +1,48 @@
 import pandas as pd
 
+#Receiving data for the Z-score calculation
+
 try:
-    Zlimit = float(input('Which limit?  '))
+    dataPoint = float(input('Which is the data point?  '))
 except:
-    print('We got an error,please make sure you wrote a number as Zlimit,ex: 2.0,3 or 0')
+    print('We got an error, please make sure you wrote a number as a data point, ex: 2.0,3 or 0')
     exit()
 
-Question = ((input('Do you have average and std already?Answer Yes or No only!  ')).upper())
+Question = ((input('Do you have the mean and standard deviation already? Answer Yes or No only! ')).upper())
 
-def Zwith_average(Zlimit):
+#Function to ask more questions for the Z-score calculation if the user has the mean and std
+
+def DataPointWith_mean(dataPoint):
     Mean = float(input('Which is the mean?  '))
-    std = float(input('Which is the std?  '))
-    formula = round(((Zlimit - Mean)/std ),2)
+    std = float(input('Which is the standard deviation?  '))
+    formula = round(((dataPoint - Mean)/std ),2)
     return formula
 
-def Zwithout_average(Zlimit,listnumbers):
+#Function to calculate the mean and std for the user based on the list of numbers they have
+
+def DataPointWithout_mean(dataPoint,listnumbers):
     listnumbers_aspandas = pd.Series(listnumbers)
     describe_numbers = (listnumbers_aspandas).describe()
-    formula = round(((Zlimit - listnumbers_aspandas).mean() /(listnumbers_aspandas).std()),2)
-    print(describe_numbers)
+    formula = round(((dataPoint - listnumbers_aspandas).mean() /(listnumbers_aspandas).std()),2)
     if listnumbers == []:
-        print('We got an error because you wrote something we cannot calculate the mean.Please make sure to write more than one number,if you already have the mean and std run the code again and answer yes.')
+        print('We got an error because you wrote something we cannot calculate the mean. Please make sure to write more than one number, if you already have the mean and std run the code again and answer yes for the "Do you have the mean and standard deviation already?" question.')
         exit()
 
     elif listnumbers_aspandas.mean() == listnumbers_aspandas.min() :
-        print('We got an error because you wrote:',(listnumbers)[0],'or',int((listnumbers)[0]),'.Please make sure to write more than one number,if you already have the mean and std run the code again and answer yes.')
+        print('We got an error because you wrote:',(listnumbers)[0],'or',int((listnumbers)[0]),'.Please make sure to write more than one number,if you already have the mean and std run the code again and answer yes for the "Do you have the mean and standard deviation already?" question.')
         exit()
 
     else: return formula
 
+#Code to return the function based on the user answer at line 11("Do you have the mean and standard deviation already?" question.)
+
 try:
     if Question == 'YES':
-        value = Zwith_average(Zlimit)
+        value = DataPointWith_mean(dataPoint)
 
     else:
-        listnumbers = list(map(float,input('Which are the numbers?  ').split()))
-        value = Zwithout_average(Zlimit,listnumbers)
+        listnumbers = list(map(float,input('Which are the numbers you want to know the mean and standard deviation?  ').split()))
+        value = DataPointWithout_mean(dataPoint,listnumbers)
 
     if value < 0 :
         value = (value)*(-1)
@@ -58,14 +65,11 @@ except ValueError as error:
     print('We got an error,please make sure you wrote a number,ex: 2.0,3 or 0')
     exit()
 
-print(value)
-print(seconddecimal)
-read_value_excel = pd.read_excel(r'Tabela da distribuição normal 2.xlsx')
-print('Until here is alright!')
+#Get the Z-score at the Standard Normal Distribution Table based on the user data.
 
+read_value_excel = pd.read_excel(r'Standard Normal Distribution Table.xlsx')
 find_value_excel = read_value_excel.set_index('Z')
 return_value_excel = find_value_excel.at[firstdecimal,seconddecimal]
-print(return_value_excel)
 
-#NOW DO PROBABILITY
-#if the (input('Do you wanna know the probability?Answer yes or no only')) == 'yes':
+#return to the user the Z-score found
+print(return_value_excel)
