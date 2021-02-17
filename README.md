@@ -1,6 +1,6 @@
 # Statistical Test
 
-Statistical Test improves a statistics calculus 15x faster than humans and much more secure from mistakes. The project finds the Z-score number used in deep calculus to receive effective probability results, a crucial tool for science, business, and economics.
+Statistical Test improves a statistics calculus 15x faster than humans and much more secure from mistakes. The project finds the Z-score number used in deep calculus to receive effective probability results, a crucial tool for science, business, and economics.Apart from other libraries, this project is user-friendly, requires only 383 KB and if there is missing data the Statistical Test calculates for you.
 
 
 For further explanations about Z-score you can access this [website](https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data/z-scores/a/z-scores-review).
