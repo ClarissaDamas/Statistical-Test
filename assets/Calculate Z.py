@@ -58,7 +58,7 @@ try:
         seconddecimal =  round((seconddecimal),4)
 
 except ZeroDivisionError as error:
-    print('The std number you gave was:',std,',please make sure to write a positive number')
+    print('The std number you gave was: ',std,',please make sure to write a positive number!')
     exit()
 
 except ValueError as error:
